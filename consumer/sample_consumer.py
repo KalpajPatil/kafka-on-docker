@@ -5,15 +5,13 @@ from confluent_kafka import Consumer
 
 def create_consumer():
     config = {
-        "bootstrap.servers": "broker:29094",  # Fixed config key (dot notation)
-        "group.id": "test-consumer2",  # Fixed config key (dot notation)
-        "enable.auto.commit": False,  # Fixed config key (dot notation)
-        "auto.offset.reset": "earliest",  # Added recommended config
-        # "socket.connection.setup.timeout.ms": 5000,  # Wait longer for connection
-        # "reconnect.backoff.ms": 1000, # Wait between retries
+        "bootstrap.servers": "broker:29094",
+        "group.id": "test-consumer2",
+        "enable.auto.commit": False,
+        "auto.offset.reset": "earliest",
     }
 
-    return Consumer(config)  # Topic is specified in subscribe, not config
+    return Consumer(config)
 
 
 if __name__ == "__main__":
@@ -24,7 +22,7 @@ if __name__ == "__main__":
         consumer.subscribe(["squares-2"])
         print("consumer starting...")
         while True:
-            msg = consumer.poll(1.0)  # Recommended to use poll with timeout
+            msg = consumer.poll(1.0)
             if msg is None:
                 print("Got a message with no value")
                 continue
@@ -46,4 +44,4 @@ if __name__ == "__main__":
     finally:
         print("in the finally block")
         if consumer is not None:
-            consumer.close()  # Ensure proper cleanup
+            consumer.close()
