@@ -24,16 +24,16 @@ services:
     networks:
         - kafka_nw
   producer:
-    build: ./producer  # Assumes a Dockerfile in ./producer
+    build: ./producer  
     depends_on:
       - broker
     environment:
-      KAFKA_BROKER: "broker:29094"  # Internal Docker network communication
+      KAFKA_BROKER: "broker:29094"  
     networks:
       - kafka_nw 
 
   consumer:
-    build: ./consumer  # Assumes a Dockerfile in ./consumer
+    build: ./consumer  
     depends_on:
       - broker
     environment:
